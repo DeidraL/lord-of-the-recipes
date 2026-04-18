@@ -15,7 +15,7 @@ Flexbox, and CSS custom properties.
 - CSS3 (Grid, Flexbox, Custom Properties, Animations)
 
 ## Live Demo
-[View Live](https://yourusername.github.io/lord-of-the-recipes)
+[View Live](https://deidral.github.io/lord-of-the-recipes/)
 
 ## What I Learned
 - CSS Grid for two-dimensional layouts
