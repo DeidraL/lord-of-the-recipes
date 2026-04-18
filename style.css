@@ -1,0 +1,288 @@
+/* === Pre-designed Tokens === */
+:root {
+  /* Colours */
+  --color-primary: #4c9e69;
+  --color-bg: #fffdf7;
+  --color-card-bg: #f4f1eb;
+  --color-text: #2d2d2d;
+  --color-text-muted: #6b6b6b;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-link: #fff;
+  --color-link-default: #1a0dab;
+  /* Typography */
+  --font-family-base: Georgia, serif;
+  --line-height-base: 1.6;
+  /* Spacing */
+  --spacing-s: 0.5rem;
+  --spacing-m: 1rem;
+  --spacing-l: 1.5rem;
+  /* Layout  */
+  --max-width: 1440px;
+  --aside-width: 280px;
+  --radius-m: 8px;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.25);
+  /* Transition */
+  --transition: 300ms ease;
+}
+/* === Dark Mode Tokens === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1e1e1e;
+    --color-card-bg: #2a2a2a;
+    --color-text: #e8e8e8;
+    --color-text-muted: #aaaaaa;
+    --color-link: #90cdf4;
+  }
+}
+
+/* === Mobile First Layout === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* == Body == */
+body {
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+/* == skip link feature == */
+.skip-link {
+  position: absolute;
+  left: 0;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: var(--spacing-s) var(--spacing-m);
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform 200ms ease;
+}
+/* == skip link on focus == */
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* == Page Grid == */
+.layout-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'aside'
+    'footer';
+  min-height: 100vh;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+/* Header */
+header {
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: var(--spacing-m) var(--spacing-l);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+/* Header nav links */
+header nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-m);
+  padding: 0 var(--spacing-m);
+  list-style: none;
+}
+header nav ul a {
+  color: var(--color-link, var(--color-link-default));
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 200ms ease-out;
+}
+header nav ul a:hover {
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 1px;
+}
+/* Main Content */
+main {
+  grid-area: main;
+  padding: var(--spacing-m);
+}
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+/* Recipe Cards */
+.recipe-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-m);
+}
+.ingredient-list,
+.info-list {
+  margin: 0 var(--spacing-m);
+}
+time,
+.ingredient-list {
+  color: var(--color-text-muted);
+}
+/* Article cards */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.recipe-card-grid article {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+  padding: var(--spacing-m);
+  animation: fadeIn 500ms ease-out forwards;
+}
+.recipe-card-grid article:nth-child(2) {
+  animation-delay: 150ms;
+}
+.recipe-card-grid article:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+/* Resizable headings and paragraph */
+h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+h2 {
+  font-size: clamp(1.35rem, 3vw, 2.25rem);
+}
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+}
+p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: var(--line-height-base);
+}
+/* Side Info */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+aside {
+  grid-area: aside;
+  background-color: var(--color-card-bg);
+  border-left: 3px solid var(--color-primary);
+  padding: var(--spacing-m);
+  animation: slideInFromRight 400ms ease-out forwards;
+}
+/* Footer */
+footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-s);
+  padding: var(--spacing-s) 0;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+/* Fooetr navigation Links */
+footer nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  gap: var(--spacing-m);
+}
+footer nav ul a {
+  text-decoration: none;
+  color: var(--color-link, var(--color-link-default));
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 400ms ease;
+}
+footer nav ul a:hover {
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* === Tablet Layout(768px+ breakpoint) === */
+@media (min-width: 768px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--spacing-m);
+  }
+  .recipe-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  footer {
+    flex-direction: row;
+    padding: var(--spacing-s) var(--spacing-m);
+  }
+}
+
+/* === Desktop Layout(1024px+ breakpoint) === */
+@media (min-width: 1024px) {
+  .layout-wrapper {
+    grid-template-columns: 1fr var(--aside-width);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'header header'
+      'main aside'
+      'footer footer';
+  }
+  .recipe-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* == Accessibility == */
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::after,
+  *::before {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Larger tap targets on touch screen devices */
+@media (pointer: coarse) {
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
