@@ -22,7 +22,7 @@
   --aside-width: 280px;
   --radius-m: 8px;
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.2);
   /* Transition */
   --transition: 300ms ease;
 }
